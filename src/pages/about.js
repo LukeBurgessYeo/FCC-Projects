@@ -27,6 +27,7 @@ class Sidebar extends React.Component {
         <Button block href="https://codepen.io/LukeBurgess94/"><FontAwesome name='codepen' size='2x' /></Button>
         <Button block href="https://github.com/LukeBurgessYeo"><FontAwesome name='github' size='2x' /></Button>
         <Button block href="#"><FontAwesome name='free-code-camp' size='2x' /></Button>
+        <hr />
       </div>
     )
   }
