@@ -6,7 +6,7 @@ const NavbarInstance = () => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-          <a href="https://www.freecodecamp.org/">FCC Projects</a>
+          <a href="https://github.com/LukeBurgessYeo/FCC-Projects">FCC Projects</a>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
