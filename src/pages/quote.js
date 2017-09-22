@@ -27,7 +27,7 @@ class NewQuote extends React.Component {
       });
   }
 
-  componentDidMount= () => {
+  componentDidMount = () => {
     this.getQuote();
   }
 

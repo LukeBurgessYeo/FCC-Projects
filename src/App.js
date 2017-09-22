@@ -5,6 +5,7 @@ import NavbarInstance from './common/navbar'
 import Home from './pages/home'
 import About from './pages/about'
 import Quote from './pages/quote'
+import Weather from './pages/weather'
 import ComingSoon from './pages/comingsoon'
 
 const App = () => (
@@ -19,7 +20,7 @@ const App = () => (
               <Route path="/home" component={Home} />
               <Route path="/about" component={About} />
               <Route path="/quote" component={Quote} />
-              <Route path="/weather" component={ComingSoon} />
+              <Route path="/weather" component={Weather} />
               <Route path="/wikipedia" component={ComingSoon} />
               <Route path="/twitch" component={ComingSoon} />
               <Route path="/calculator" component={ComingSoon} />
