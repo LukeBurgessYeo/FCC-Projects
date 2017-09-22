@@ -27,7 +27,7 @@ export default class About extends React.Component {
       default:
         break;
     }
-    this.setState(prev => ({ activeKey: selectedKey }));
+    this.setState({ activeKey: selectedKey });
   }
 
   render() {
@@ -68,7 +68,7 @@ export default class About extends React.Component {
                 <p>It is natural to ask the question: Why React? Or maybe: What was wrong with jQuery? The simple answer is, jQuery isn't good for doing certains things...</p>
                 <p>jQuery is an amazing library for speeding up the sorts of things that JavaScript was originaly indended for: input validation and basic manipulation of the DOM. However, building a Single Page Application (which is now the fansionable thing to do) is unbelievably difficult using just jQuery.</p>
                 <p>React, however, was designed especially for building complex user interfaces and has become one of the market leading technologies for devloping the front end of the web. That is why I chose React.</p>
-                <p>The app itself was set up using the <a href="https://github.com/facebookincubator/create-react-app">Creat React App</a> tool which takes all the pain out of setting up a basic React application.</p>
+                <p>The app itself was set up using the <a href="https://github.com/facebookincubator/create-react-app">Create React App</a> tool which takes all the pain out of setting up a basic React application.</p>
                 <hr />
                 <h2 ref="bootstrap">Bootstrap</h2>
                 <p>It wouldn't be Free Code Camp without Bootstrap, but the standard Bootstrap library requires jQuery which defeats the point of using React. Fortunately there is an ongoing project to rebuild Boostrap using React: <a href="https://react-bootstrap.github.io/">React Bootstrap</a>.</p>

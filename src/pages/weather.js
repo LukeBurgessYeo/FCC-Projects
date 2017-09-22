@@ -46,12 +46,11 @@ class WeatherData extends React.Component {
         <h2>{this.state.weather.weather[0].main}</h2>
         <h3>{this.state.weather.weather[0].description}</h3>
         <img src={this.state.weather.weather[0].icon} alt=''/>
-        <h3>{this.convertTemp(this.state.weather.main.temp)}</h3>
-        {(this.state.weather.main.temp != '') && <Button onClick={this.handleClick}>{this.state.celcius ? "Celcius" : "Fahrenheit"}</Button>}
+        <h3>{this.convertTemp(this.state.weather.main.temp)} {(this.state.weather.main.temp !== '') && (this.state.celcius ? "C" : "F")}</h3>
+        {(this.state.weather.main.temp !== '') && <Button onClick={this.handleClick}>Change Units</Button>}
       </div>
     )
   }
-
 }
 
 const Weather = () => (

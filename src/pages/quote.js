@@ -8,22 +8,24 @@ class NewQuote extends React.Component {
     super(props);
     this.state = {
       quote: {},
-      url: "#"
+      url: "#",
+      loading: true
     }
   }
 
   getQuote = () => {
     axios.get(`https://cors-anywhere.herokuapp.com/http://quotes.stormconsultancy.co.uk/random.json`)
       .then(res => {
-        const auth = res.data.author;
+        const auth = "- " + res.data.author;
         const cont = res.data.quote;
-        this.setState(prev => ({
+        this.setState({
           quote: {
-              content: cont,
-              author: auth
-            },
-            url: "https://twitter.com/home/?status=" + cont + " (" + auth + ")"
-          }));
+            content: cont,
+            author: auth
+          },
+          url: "https://twitter.com/home/?status=" + cont + " (" + auth + ")",
+          loading: false
+        });
       });
   }
 
@@ -32,6 +34,7 @@ class NewQuote extends React.Component {
   }
 
   handleClick = () => {
+    this.setState({loading: true});
     this.getQuote();
   }
 
@@ -39,11 +42,11 @@ class NewQuote extends React.Component {
     return (
       <div>
         <h3><FontAwesome name='quote-left' /> {this.state.quote.content} <FontAwesome name='quote-right' /></h3>
-        <h4>- {this.state.quote.author}</h4>
+        <h4>{this.state.quote.author}</h4>
         <br />
         <ButtonToolbar>
-          <Button bsStyle="primary" onClick={this.handleClick}>New Quote</Button>
-          <Button bsStyle="primary" href={this.state.url}><FontAwesome name='twitter' /> Tweet</Button>
+          <Button bsStyle="primary" className={(this.state.loading) && "disabled"} onClick={this.handleClick}>{(this.state.loading) ? "Loading..." : "New Quote"}</Button>
+          <Button bsStyle="primary" className={(this.state.loading) && "disabled"} href={this.state.url}><FontAwesome name='twitter' /> Tweet</Button>
         </ButtonToolbar>
       </div>
     )
