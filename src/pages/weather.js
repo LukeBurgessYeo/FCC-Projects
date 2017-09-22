@@ -37,11 +37,7 @@ class WeatherData extends React.Component {
   }
 
   convertTemp = (tmp) => {
-    if (this.state.celcius) {
-      return tmp;
-    } else {
-      return (Number(tmp) * 1.8)
-    }
+    return (this.state.celcius) ? tmp : (Number(tmp) * 1.8).toFixed(2);
   }
 
   render() {
@@ -51,7 +47,7 @@ class WeatherData extends React.Component {
         <h3>{this.state.weather.weather[0].description}</h3>
         <img src={this.state.weather.weather[0].icon} alt=''/>
         <h3>{this.convertTemp(this.state.weather.main.temp)}</h3>
-        <Button onClick={this.handleClick}>{this.state.celcius ? "Celcius" : "Fahrenheit"}</Button>
+        {(this.state.weather.main.temp != '') && <Button onClick={this.handleClick}>{this.state.celcius ? "Celcius" : "Fahrenheit"}</Button>}
       </div>
     )
   }
