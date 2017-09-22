@@ -13,7 +13,7 @@ class NewQuote extends React.Component {
   }
 
   getQuote = () => {
-    axios.get(`http://quotes.stormconsultancy.co.uk/random.json`)
+    axios.get(`https://cors-anywhere.herokuapp.com/http://quotes.stormconsultancy.co.uk/random.json`)
       .then(res => {
         const auth = res.data.author;
         const cont = res.data.quote;
