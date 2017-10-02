@@ -65,14 +65,14 @@ export default class About extends React.Component {
                 <p>The Free Code Camp projects were fantistic for easing myself into front end development back when I was just starting out, so I decided to revisit these same projects to ease myself into building complex web applications with a new set of technologies. If you wish to view my original attempts at the Free Code Camp projects, they are still on my CodePen page which you can access via the button with the CodePen logo.</p>
                 <hr />
                 <h2 ref="react">React</h2>
-                <p>It is natural to ask the question: Why React? Or maybe: What was wrong with jQuery? The simple answer is, jQuery isn't good for doing certains things...</p>
+                <p>It is natural to ask the question: Why React? Or maybe: What was wrong with jQuery? The simple answer is, jQuery is not good for doing certains things...</p>
                 <p>jQuery is an amazing library for speeding up the sorts of things that JavaScript was originaly indended for: input validation and basic manipulation of the DOM. However, building a Single Page Application (which is now the fansionable thing to do) is unbelievably difficult using just jQuery.</p>
                 <p>React, however, was designed especially for building complex user interfaces and has become one of the market leading technologies for devloping the front end of the web. That is why I chose React.</p>
                 <p>The app itself was set up using the <a href="https://github.com/facebookincubator/create-react-app">Create React App</a> tool which takes all the pain out of setting up a basic React application.</p>
                 <hr />
                 <h2 ref="bootstrap">Bootstrap</h2>
-                <p>It wouldn't be Free Code Camp without Bootstrap, but the standard Bootstrap library requires jQuery which defeats the point of using React. Fortunately there is an ongoing project to rebuild Boostrap using React: <a href="https://react-bootstrap.github.io/">React Bootstrap</a>.</p>
-                <p>React Boostrap is the reason this app looks the way it does, as I have delibrately left the styling to Bootstrap's default CSS. Although the React Bootstrap project is still in development, I hope that building this application will give me enough knowledge of the current API to contribute to the project and help React Bootstrap reach it's v1.0 release.</p>
+                <p>It wouldn not be Free Code Camp without Bootstrap, but the standard Bootstrap library requires jQuery which defeats the point of using React. Fortunately there is an ongoing project to rebuild Boostrap using React: <a href="https://react-bootstrap.github.io/">React Bootstrap</a>.</p>
+                <p>React Boostrap is the reason this app looks the way it does, as I have delibrately left the styling to Bootstraps default CSS. Although the React Bootstrap project is still in development, I hope that building this application will give me enough knowledge of the current API to contribute to the project and help React Bootstrap reach it's v1.0 release.</p>
                 <hr />
                 <h2 ref="reactrouter">React Router</h2>
                 <p>The final technology worth mentioning is <a href="https://reacttraining.com/react-router/">React Router</a>. React Router is used for front-end routing, to keep the URL in sync with the UI despite the fact that this is a static application.</p>
