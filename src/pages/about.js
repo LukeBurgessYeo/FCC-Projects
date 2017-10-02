@@ -72,7 +72,7 @@ export default class About extends React.Component {
                 <hr />
                 <h2 ref="bootstrap">Bootstrap</h2>
                 <p>It wouldn not be Free Code Camp without Bootstrap, but the standard Bootstrap library requires jQuery which defeats the point of using React. Fortunately there is an ongoing project to rebuild Boostrap using React: <a href="https://react-bootstrap.github.io/">React Bootstrap</a>.</p>
-                <p>React Boostrap is the reason this app looks the way it does, as I have delibrately left the styling to Bootstraps default CSS. Although the React Bootstrap project is still in development, I hope that building this application will give me enough knowledge of the current API to contribute to the project and help React Bootstrap reach it's v1.0 release.</p>
+                <p>React Boostrap is the reason this app looks the way it does, as I have delibrately left the styling to Bootstraps default CSS. Although the React Bootstrap project is still in development, I hope that building this application will give me enough knowledge of the current API to contribute to the project and help React Bootstrap reach a v1.0 release.</p>
                 <hr />
                 <h2 ref="reactrouter">React Router</h2>
                 <p>The final technology worth mentioning is <a href="https://reacttraining.com/react-router/">React Router</a>. React Router is used for front-end routing, to keep the URL in sync with the UI despite the fact that this is a static application.</p>
