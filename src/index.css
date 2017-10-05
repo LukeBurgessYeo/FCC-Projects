@@ -7,3 +7,29 @@ body {
 img {
   max-width: 100%;
 }
+
+.wikiWrap {
+  margin: 12px 0px 12px 0px;
+}
+
+.wikiCard:link,
+.wikiCard:visited {
+  text-align: left;
+  background-color: #337ab7;
+  color: White;
+  border: 1px solid #204d74;
+  border-radius: 6px;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  width: 100%;
+}
+
+.wikiCard:hover,
+.wikiCard:active {
+  text-align: left;
+  background-color: #286090;
+  color: white;
+}
