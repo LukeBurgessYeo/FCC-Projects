@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Button, Jumbotron } from 'react-bootstrap' 
+import { Button, Jumbotron } from 'react-bootstrap'
 
 class WeatherData extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class WeatherData extends React.Component {
   }
 
   handleClick = () => {
-    this.setState(prev => ({celcius: !prev.celcius}));
+    this.setState(prev => ({ celcius: !prev.celcius }));
   }
 
   convertTemp = (tmp) => {
@@ -41,11 +41,11 @@ class WeatherData extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
         <h2>{this.state.weather.weather[0].main}</h2>
         <h3>{this.state.weather.weather[0].description}</h3>
-        <img src={this.state.weather.weather[0].icon} alt=''/>
+        <img src={this.state.weather.weather[0].icon} alt='' />
         <h3>{this.convertTemp(this.state.weather.main.temp)} {(this.state.weather.main.temp !== '') && (this.state.celcius ? "C" : "F")}</h3>
         {(this.state.weather.main.temp !== '') && <Button onClick={this.handleClick}>Change Units</Button>}
       </div>

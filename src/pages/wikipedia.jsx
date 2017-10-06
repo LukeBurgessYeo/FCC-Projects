@@ -25,6 +25,7 @@ class SearchWiki extends React.Component {
         });
       })
       .catch(err => {
+        this.setState({ searching: false });
         console.log(err);
       });
   }

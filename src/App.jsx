@@ -7,6 +7,7 @@ import About from './pages/about'
 import Quote from './pages/quote'
 import Weather from './pages/weather'
 import Wikipedia from './pages/wikipedia'
+import Twitch from './pages/twitch'
 import ComingSoon from './pages/comingsoon'
 
 const App = () => (
@@ -23,7 +24,7 @@ const App = () => (
               <Route path="/quote" component={Quote} />
               <Route path="/weather" component={Weather} />
               <Route path="/wikipedia" component={Wikipedia} />
-              <Route path="/twitch" component={ComingSoon} />
+              <Route path="/twitch" component={Twitch} />
               <Route path="/calculator" component={ComingSoon} />
               <Route path="/pomodoro" component={ComingSoon} />
               <Route path="/tictactoe" component={ComingSoon} />
