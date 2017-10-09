@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import FontAwesome from 'react-fontawesome'
 import { Button, Jumbotron } from 'react-bootstrap'
 
 class WeatherData extends React.Component {
@@ -14,7 +15,8 @@ class WeatherData extends React.Component {
         }],
         main: { temp: '' }
       },
-      celcius: true
+      celcius: true,
+      loading: true
     }
   }
 
@@ -23,8 +25,10 @@ class WeatherData extends React.Component {
       axios
         .get('https://fcc-weather-api.glitch.me/api/current?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude)
         .then(res => {
-          const weather = res.data;
-          this.setState({ weather });
+          this.setState({ 
+            weather: res.data,
+            loading: false
+          });
         })
         .catch(err => {
           console.log(err);
@@ -43,11 +47,18 @@ class WeatherData extends React.Component {
   render() {
     return (
       <div>
-        <h2>{this.state.weather.weather[0].main}</h2>
-        <h3>{this.state.weather.weather[0].description}</h3>
-        <img src={this.state.weather.weather[0].icon} alt='' />
-        <h3>{this.convertTemp(this.state.weather.main.temp)} {(this.state.weather.main.temp !== '') && (this.state.celcius ? "C" : "F")}</h3>
-        {(this.state.weather.main.temp !== '') && <Button onClick={this.handleClick}>Change Units</Button>}
+        {(this.state.loading) ? 
+          <div style={{"textAlign": "center", "fontSize": 56 + "px" }}>
+            <FontAwesome name='refresh' spin={true} />
+            <p style={{"fontSize": 18 + "px" }}>(Make sure you are allowing geolocation.)</p>
+          </div> :
+          <div>
+            <h2>{this.state.weather.weather[0].main}</h2>
+            <h3>{this.state.weather.weather[0].description}</h3>
+            <img src={this.state.weather.weather[0].icon} alt='' />
+            <h3>{this.convertTemp(this.state.weather.main.temp)} {(this.state.weather.main.temp !== '') && (this.state.celcius ? "C" : "F")}</h3>
+            {(this.state.weather.main.temp !== '') && <Button onClick={this.handleClick}>Change Units</Button>}
+          </div>}
       </div>
     )
   }
