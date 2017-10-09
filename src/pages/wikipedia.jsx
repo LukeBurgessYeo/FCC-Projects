@@ -60,7 +60,10 @@ class SearchWiki extends React.Component {
             />
           </FormGroup>
         </form>
-        {(this.state.searching) && <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}><FontAwesome name='refresh' spin={true} /></div>}
+        {(this.state.searching) &&
+          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
+            <FontAwesome name='refresh' spin={true} />
+          </div>}
         {cards.map((value, index) => (
           <div className="wikiWrap" key={index}>
             <a className="wikiCard" href={value.hlink} target="_blank">

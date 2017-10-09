@@ -45,7 +45,10 @@ class Broadcasters extends React.Component {
     return (
       <div>
         <Button onClick={this.getStreams}>Refresh</Button>
-        {(this.state.loading) && <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}><FontAwesome name='refresh' spin={true} /></div>}
+        {(this.state.loading) &&
+          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
+            <FontAwesome name='refresh' spin={true} />
+          </div>}
         {(this.state.result.length === this.state.streams.length) && this.state.result.map((value, index) => (
           <div className="wikiWrap" key={index}>
             <a className="wikiCard" href={"https://twitch.tv/" + value.title} target="_blank">

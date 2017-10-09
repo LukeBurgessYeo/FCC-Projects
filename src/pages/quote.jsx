@@ -34,15 +34,21 @@ class NewQuote extends React.Component {
   }
 
   handleClick = () => {
-    this.setState({loading: true});
+    this.setState({ loading: true });
     this.getQuote();
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <h3><FontAwesome name='quote-left' /> {this.state.quote.content} <FontAwesome name='quote-right' /></h3>
-        <h4>{this.state.quote.author}</h4>
+        {(this.state.loading) ?
+          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
+            <FontAwesome name='refresh' spin={true} />
+          </div> :
+          <div>
+            <h3><FontAwesome name='quote-left' /> {this.state.quote.content} <FontAwesome name='quote-right' /></h3>
+            <h4>{this.state.quote.author}</h4>
+          </div>}
         <br />
         <ButtonToolbar>
           <Button bsStyle="primary" className={(this.state.loading) && "disabled"} onClick={this.handleClick}>{(this.state.loading) ? "Loading..." : "New Quote"}</Button>
