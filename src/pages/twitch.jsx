@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import FontAwesome from 'react-fontawesome'
+import { Button } from 'react-bootstrap'
 
 class Broadcasters extends React.Component {
   constructor(props) {
@@ -12,12 +13,15 @@ class Broadcasters extends React.Component {
     }
   }
 
-  componentDidMount = () => {
+  getStreams = () => {
+    this.setState({
+      loading: true,
+      result: []
+    });
     this.state.streams.forEach(stream => {
       axios
         .get('https://api.twitch.tv/kraken/streams/' + stream + '?client_id=ht7j8oqlzyu29r9mpn3tqlp4xii7zl')
         .then(res => {
-          console.log(res);
           this.setState(prev => ({
             result: [...prev.result, { title: stream, data: res.data }]
           }));
@@ -33,10 +37,14 @@ class Broadcasters extends React.Component {
     this.setState({ loading: false });
   }
 
+  componentDidMount = () => {
+    this.getStreams();
+  }
+
   render() {
     return (
       <div>
-        <h3>Broadcasters</h3>
+        <Button onClick={this.getStreams}>Refresh</Button>
         {(this.state.loading) && <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}><FontAwesome name='refresh' spin={true} /></div>}
         {(this.state.result.length === this.state.streams.length) && this.state.result.map((value, index) => (
           <div className="wikiWrap" key={index}>
