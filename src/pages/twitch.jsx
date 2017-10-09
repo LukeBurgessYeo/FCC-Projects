@@ -28,7 +28,6 @@ class Broadcasters extends React.Component {
         })
         .catch(err => {
           this.setState({
-            loading: false,
             result: "An error occoured getting Twitch streams."
           });
           console.log(err);
@@ -42,14 +41,20 @@ class Broadcasters extends React.Component {
   }
 
   render() {
+    if (typeof this.state.result === "string") {
+      return (
+        <h3>{this.state.result}</h3>
+      )
+    }
     return (
       <div>
         <Button onClick={this.getStreams}>Refresh</Button>
-        {(this.state.loading) &&
-          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
+        {(this.state.result.length !== this.state.streams.length) ? 
+          <div style={{"textAlign": "center", "fontSize": 56 + "px" }}>
+            <br />
             <FontAwesome name='refresh' spin={true} />
-          </div>}
-        {(this.state.result.length === this.state.streams.length) && this.state.result.map((value, index) => (
+          </div> :
+          this.state.result.map((value, index) => (
           <div className="wikiWrap" key={index}>
             <a className="wikiCard" href={"https://twitch.tv/" + value.title} target="_blank">
               {(value.data.stream) ?
