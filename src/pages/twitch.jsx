@@ -40,9 +40,17 @@ class Broadcasters extends React.Component {
         {(this.state.loading) && <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}><FontAwesome name='refresh' spin={true} /></div>}
         {(this.state.result.length === this.state.streams.length) && this.state.result.map((value, index) => (
           <div className="wikiWrap" key={index}>
-            <a className="wikiCard" href={value.data._links.self} target="_blank">
-              <h3>{value.title}</h3>
-              <p>{(value.data.stream) ? value.data.stream.channel.status : "Offline"}</p>
+            <a className="wikiCard" href={"https://twitch.tv/" + value.title} target="_blank">
+              {(value.data.stream) ?
+                <div>
+                  <h3>{value.data.stream.channel.display_name}</h3>
+                  <p>{value.data.stream.game}</p>
+                  <h4>{value.data.stream.channel.status}</h4>
+                </div> :
+                <div>
+                  <h3>{value.title}</h3>
+                  <p>Offline</p>
+                </div>}
             </a>
           </div>
         ))}
