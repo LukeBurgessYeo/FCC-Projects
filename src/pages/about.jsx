@@ -1,6 +1,6 @@
 import React from 'react'
-import { Grid, Row, Col, Nav, NavItem, Button } from 'react-bootstrap'
 import FontAwesome from 'react-fontawesome'
+import { Grid, Row, Col, Nav, NavItem, Button } from 'react-bootstrap'
 
 export default class About extends React.Component {
   constructor(props) {
