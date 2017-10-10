@@ -25,7 +25,7 @@ class WeatherData extends React.Component {
       axios
         .get('https://fcc-weather-api.glitch.me/api/current?lat=' + position.coords.latitude + '&lon=' + position.coords.longitude)
         .then(res => {
-          this.setState({ 
+          this.setState({
             weather: res.data,
             loading: false
           });
@@ -47,10 +47,10 @@ class WeatherData extends React.Component {
   render() {
     return (
       <div>
-        {(this.state.loading) ? 
-          <div style={{"textAlign": "center", "fontSize": 56 + "px" }}>
+        {(this.state.loading) ?
+          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
             <FontAwesome name='refresh' spin={true} />
-            <p style={{"fontSize": 18 + "px" }}>(Make sure you are allowing geolocation.)</p>
+            <p style={{ "fontSize": 18 + "px" }}>(Make sure you are allowing geolocation.)</p>
           </div> :
           <div>
             <h2>{this.state.weather.weather[0].main}</h2>

@@ -51,7 +51,7 @@ class Calc extends React.Component {
 }
 
 const Calculator = () => (
-  <div style={{"textAlign": "center"}}>
+  <div style={{ "textAlign": "center" }}>
     <h2>ReactJS Calculator</h2>
     <Calc />
   </div>
