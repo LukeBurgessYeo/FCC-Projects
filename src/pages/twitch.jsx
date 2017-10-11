@@ -49,27 +49,27 @@ class Broadcasters extends React.Component {
     return (
       <div>
         <Button onClick={this.getStreams}>Refresh</Button>
-        {(this.state.result.length !== this.state.streams.length) ? 
-          <div style={{"textAlign": "center", "fontSize": 56 + "px" }}>
+        {(this.state.result.length !== this.state.streams.length) ?
+          <div style={{ "textAlign": "center", "fontSize": 56 + "px" }}>
             <br />
             <FontAwesome name='refresh' spin={true} />
           </div> :
           this.state.result.map((value, index) => (
-          <div className="wikiWrap" key={index}>
-            <a className="wikiCard" href={"https://twitch.tv/" + value.title} target="_blank">
-              {(value.data.stream) ?
-                <div>
-                  <h3>{value.data.stream.channel.display_name}</h3>
-                  <p>{value.data.stream.game}</p>
-                  <h4>{value.data.stream.channel.status}</h4>
-                </div> :
-                <div>
-                  <h3>{value.title}</h3>
-                  <p>Offline</p>
-                </div>}
-            </a>
-          </div>
-        ))}
+            <div className="wikiWrap" key={index}>
+              <a className="wikiCard" href={"https://twitch.tv/" + value.title} target="_blank">
+                {(value.data.stream) ?
+                  <div>
+                    <h3>{value.data.stream.channel.display_name}</h3>
+                    <p>{value.data.stream.game}</p>
+                    <h4>{value.data.stream.channel.status}</h4>
+                  </div> :
+                  <div>
+                    <h3>{value.title}</h3>
+                    <p>Offline</p>
+                  </div>}
+              </a>
+            </div>
+          ))}
       </div>
     )
   }

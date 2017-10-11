@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 0px 0px 10px 0px;
+  padding: 0 0 10px 0;
   font-family: sans-serif;
 }
 
@@ -9,7 +9,7 @@ img {
 }
 
 .wikiWrap {
-  margin: 12px 0px 12px 0px;
+  margin: 12px 0 12px 0;
 }
 
 .wikiCard:link,
@@ -32,6 +32,7 @@ img {
   text-align: left;
   background-color: #286090;
   color: white;
+<<<<<<< HEAD
 }
 
 .calcBtn {
@@ -62,4 +63,6 @@ img {
 .calcBtn:hover {
   background-color: black;
   color: white;
+=======
+>>>>>>> 6310bc92e84e02d1d1ca650af89014cd50d98108
 }
