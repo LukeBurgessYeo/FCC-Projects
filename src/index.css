@@ -33,3 +33,33 @@ img {
   background-color: #286090;
   color: white;
 }
+
+.calcBtn {
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 0;
+  background-color: white;
+  color: black;
+}
+
+.clearBtn {
+  width: 212px;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 0;
+  background-color: white;
+  color: black;
+}
+
+.calcDisplay {
+  font-size: 20px;
+  margin: 2px 2px 5px 2px;
+}
+
+.clearBtn:hover,
+.calcBtn:hover {
+  background-color: black;
+  color: white;
+}
