@@ -1,29 +1,26 @@
 import React from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
 
-//TODO: Minus numbers!
 class Calc extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       opp: '',
       value: '0',
-      result: '0',
-      displayResult: false
+      result: '0'
     }
   }
 
   Clear = () => {
     this.setState({
       opp: '',
-      value: '0', 
-      result: '0',
-      displayResult: false
+      value: '0',
+      result: '0'
     });
   }
 
   Evaluate = () => {
-    switch(this.state.result[0]) {
+    switch (this.state.result[0]) {
       case '*':
         this.setState(p => ({
           opp: '=',
@@ -59,8 +56,9 @@ class Calc extends React.Component {
 
   updateValue = (val) => {
     if (this.state.value === '0' || this.state.opp === '=') {
+      val = ((val === '.') ? '0' : '') + val;
       this.setState({
-        value: val, 
+        value: val,
         opp: ''
       });
     } else if (this.state.opp !== '') {
@@ -77,10 +75,22 @@ class Calc extends React.Component {
   }
 
   updateOpp = (op) => {
-    if (this.state.value === '0' || isNaN(this.state.result[0])) {
+    if (this.state.value === '0' && op === '-') {
+      this.setState({ value: '-' });
+    } else if (this.state.opp !== '' && op === '-') {
+      this.setState(p => ({
+        opp: '',
+        value: '-',
+        result: p.opp + p.value
+      }));
+    } else if (this.state.value === '0' || (this.state.value === '0' && isNaN(this.state.result[0]))) {
       return;
-    } else {
-      this.setState({opp: op});
+    } else if (this.state.opp === '') {
+      this.setState({ opp: op });
+    }
+    if (this.state.opp === '=' || this.state.value !== '0') {
+      this.Evaluate();
+      this.setState({ opp: op });
     }
   }
 
