@@ -44,6 +44,19 @@ img {
   color: black;
 }
 
+.selected {
+  background-color: black;
+  color: white;
+  cursor: default;
+}
+
+.disabled,
+.disabled:hover {
+  background-color: grey !important;
+  color: black !important;
+  cursor: not-allowed !important;
+}
+
 .clearBtn {
   width: 212px;
   margin: 2px;
@@ -56,6 +69,7 @@ img {
 .calcDisplay {
   font-size: 20px;
   margin: 2px 2px 5px 2px;
+  min-height: 30px;
 }
 
 .clearBtn:hover,
