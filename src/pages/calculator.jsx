@@ -20,6 +20,7 @@ class Calc extends React.Component {
   }
 
   Evaluate = () => {
+    if (this.state.value === '-') return;
     switch (this.state.result[0]) {
       case '*':
         this.setState(p => ({
