@@ -9,6 +9,7 @@ import Weather from './pages/weather'
 import Wikipedia from './pages/wikipedia'
 import Twitch from './pages/twitch'
 import Calculator from './pages/calculator'
+import Pomodoro from './pages/pomodoro'
 import ComingSoon from './pages/comingsoon'
 
 const App = () => (
@@ -27,7 +28,7 @@ const App = () => (
               <Route path="/wikipedia" component={Wikipedia} />
               <Route path="/twitch" component={Twitch} />
               <Route path="/calculator" component={Calculator} />
-              <Route path="/pomodoro" component={ComingSoon} />
+              <Route path="/pomodoro" component={Pomodoro} />
               <Route path="/tictactoe" component={ComingSoon} />
               <Route path="/simon" component={ComingSoon} />
               <Redirect to="/" component={Home} />
