@@ -23,18 +23,19 @@ class Clock extends React.Component {
   }
 
   decrease = () => {
-    this.setState(p => ({
-      minutes: p.minutes - 1,
-      time: {
-        minutes: p.time.minutes - 1,
-        seconds: p.time.seconds
-      }
-    }));
+    if (this.state.time.minutes * 60 + this.state.time.seconds > 61) {
+      this.setState(p => ({
+        minutes: p.minutes - 1,
+        time: {
+          minutes: p.time.minutes - 1,
+          seconds: p.time.seconds
+        }
+      }));
+    }
   }
 
   countDown = () => {
     if (this.state.time.minutes === 0 && this.state.time.seconds === 1) {
-      this.setState({ time: { mintes: 0, seconds: 0 } });
       alert("Time Over!");
       this.stop();
       return;
@@ -45,7 +46,7 @@ class Clock extends React.Component {
           minutes: p.time.minutes - 1,
           seconds: 60
         }
-      }))
+      }));
     }
     this.setState(p => ({
       time: {
@@ -74,13 +75,17 @@ class Clock extends React.Component {
   }
 
   render() {
+    const mins = (this.state.time.minutes > 9) ? this.state.time.minutes : "0" + this.state.time.minutes;
+    const secs = (this.state.time.seconds > 9) ? this.state.time.seconds : "0" + this.state.time.seconds;
+    const button = (this.state.counting) ?
+      <Button bsStyle="primary" onClick={this.stop}>Stop</Button> :
+      <Button bsStyle="primary" onClick={this.start}>Start</Button>;
+
     return (
       <div>
-        <h2>{this.state.time.minutes}m {this.state.time.seconds}s</h2>
+        <h2>{mins} : {secs}</h2>
         <Button bsStyle="primary" onClick={this.decrease}>-</Button>
-        {(this.state.counting) ?
-          <Button bsStyle="primary" onClick={this.stop}>Stop</Button> :
-          <Button bsStyle="primary" onClick={this.start}>Start time for: {this.state.minutes} minutes</Button>}
+        {button}
         <Button bsStyle="primary" onClick={this.increase}>+</Button>
       </div>
     )
