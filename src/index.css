@@ -44,17 +44,10 @@ img {
   color: black;
 }
 
-.selected {
-  background-color: black;
-  color: white;
-  cursor: default;
-}
-
-.disabled,
-.disabled:hover {
+.selected,
+.selected:hover {
   background-color: grey !important;
   color: black !important;
-  cursor: not-allowed !important;
 }
 
 .clearBtn {

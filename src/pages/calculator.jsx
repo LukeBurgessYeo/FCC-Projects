@@ -7,7 +7,10 @@ class Calc extends React.Component {
     this.state = {
       opp: '',
       value: '',
-      result: null
+      result: {
+        opp: null,
+        value: null
+      }
     }
   }
 
@@ -15,7 +18,10 @@ class Calc extends React.Component {
     this.setState({
       opp: '',
       value: '',
-      result: null
+      result: {
+        opp: null,
+        value: null
+      }
     });
   }
 
@@ -23,30 +29,51 @@ class Calc extends React.Component {
     if (this.state.value === '-') {
       return;
     }
-    if (this.state.result === null) {
+    if (this.state.result.value === null) {
       this.setState(p => ({
-        result: +p.value
+        opp: '',
+        result: {
+          opp: p.opp,
+          value: +p.value
+        }
       }));
+      return;
     }
-    switch (this.state.opp) {
+    switch (this.state.result.opp) {
       case '*':
         this.setState(p => ({
-          result: p.result * +p.value
+          opp: '',
+          result: {
+            opp: p.opp,
+            value: p.result.value * +p.value
+          }
         }));
         break;
       case '/':
         this.setState(p => ({
-          result: p.result / +p.value
+          opp: '',
+          result: {
+            opp: p.opp,
+            value: p.result.value / +p.value
+          }
         }));
         break;
       case '+':
         this.setState(p => ({
-          result: p.result + +p.value
+          opp: '',
+          result: {
+            opp: p.opp,
+            value: p.result.value + +p.value
+          }
         }));
         break;
       case '-':
         this.setState(p => ({
-          result: p.result - +p.value
+          opp: '',
+          result: {
+            opp: p.opp,
+            value: p.result.value - +p.value
+          }
         }));
         break;
       default:
@@ -55,8 +82,15 @@ class Calc extends React.Component {
   }
 
   updateValue = (val) => {
-    if (+this.state.value === this.state.result) {
-      this.setState({ value: '' });
+    if (this.state.opp !== '') {
+      this.setState(p => ({
+        opp: '',
+        value: '',
+        result: {
+          opp: p.opp,
+          value: +p.value
+        }
+      }));
     }
     this.setState(p => ({
       value: p.value + val
@@ -64,21 +98,27 @@ class Calc extends React.Component {
   }
 
   updateOpp = (op) => {
-    if ((this.state.value === '' || this.state.opp !== '') && op === '-') {
-      this.setState({ value: '-' });
+    if (this.state.value === '' && op === '-') {
+      this.setState({
+        value: '-1'
+      });
       return;
     }
     if (this.state.value === '' && this.state.result === '0') {
       return;
     }
     this.updateResult();
-    this.setState({ opp: op });
+    this.setState(p => ({
+      opp: op,
+      value: '' + p.result.value
+    }));
   }
 
   equals = () => {
     this.updateResult();
     this.setState(p => ({
-      value: p.result
+      opp: '',
+      value: '' + p.result.value
     }));
   }
 
