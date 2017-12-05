@@ -11,6 +11,7 @@ import Twitch from './pages/twitch'
 import Calculator from './pages/calculator'
 import Pomodoro from './pages/pomodoro'
 import ComingSoon from './pages/comingsoon'
+import TicTacToe from './pages/tictactoe'
 
 const App = () => (
   <Router basename="/FCC-Projects">
@@ -29,7 +30,7 @@ const App = () => (
               <Route path="/twitch" component={Twitch} />
               <Route path="/calculator" component={Calculator} />
               <Route path="/pomodoro" component={Pomodoro} />
-              <Route path="/tictactoe" component={ComingSoon} />
+              <Route path="/tictactoe" component={TicTacToe} />
               <Route path="/simon" component={ComingSoon} />
               <Redirect to="/" component={Home} />
             </Switch>
