@@ -1,5 +1,8 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { AIChoice, CheckForWin } from '../scripts/tictactoeLogic'
+
+const AI_SPEED = 500;
 
 const Box = (props) => {
   const canClick = (props.value === "" && props.enabled);
@@ -13,6 +16,29 @@ const Box = (props) => {
   )
 }
 
+const Footer = (props) => {
+  if (props.winner === "") {
+    return (
+      <div>
+        <h3>{(props.playerTurn ? "Your " : "AI's ")} turn.</h3>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <h3>
+        {(props.winner === "D")
+          ? "Draw!"
+          : (props.playerTurn)
+            ? "You Lose!"
+            : "You Win!"}
+      </h3>
+      <Button bsStyle="primary" onClick={props.reset}>Play Again?</Button>
+    </div>
+  );
+}
+
 class Board extends React.Component {
   constructor(props) {
     super(props);
@@ -22,46 +48,19 @@ class Board extends React.Component {
         ["", "", ""],
         ["", "", ""]
       ],
-      xTurn: true,
+      playerTurn: null,
       winner: ""
     };
   }
 
-  CheckForWin = (g) => {
-    const lines = [
-      g[0].join(""),
-      g[1].join(""),
-      g[2].join(""),
-      g[0][0] + g[1][0] + g[2][0],
-      g[0][1] + g[1][1] + g[2][1],
-      g[0][2] + g[1][2] + g[2][2],
-      g[0][0] + g[1][1] + g[2][2],
-      g[0][2] + g[1][1] + g[2][0]
-    ];
-
-    for (const line in lines) {
-      if (lines[line] === "XXX") {
-        return "X's Win!";
-      } else if (lines[line] === "OOO") {
-        return "O's Win!";
-      }
-    }
-
-    if (lines.slice(0, 3).join("").length === 9) {
-      return "Draw!";
-    }
-
-    return "";
-  }
-
   Choose = (coords) => {
     let newGrid = this.state.grid;
-    newGrid[coords[0]][coords[1]] = (this.state.xTurn) ? "X" : "O";
-    const win = this.CheckForWin(newGrid);
+    newGrid[coords[0]][coords[1]] = (this.state.playerTurn) ? "X" : "O";
+    const win = CheckForWin(newGrid);
 
     this.setState(p => ({
       grid: newGrid,
-      xTurn: !p.xTurn,
+      playerTurn: !p.playerTurn,
       winner: win
     }));
   }
@@ -73,24 +72,35 @@ class Board extends React.Component {
         ["", "", ""],
         ["", "", ""]
       ],
-      xTurn: true,
+      playerTurn: null,
       winner: ""
     });
   }
 
-  render() {
-    const Play = (props) => (
-      <div>
-        <h3>{(this.state.xTurn ? "X's " : "O's ")} turn.</h3>
-      </div>
-    );
+  PlayFirst = (first) => {
+    this.setState({
+      playerTurn: first
+    });
+  }
 
-    const GameOver = (props) => (
-      <div>
-        <h3>{this.state.winner}</h3>
-        <Button bsStyle="primary" onClick={this.Reset}>Play Again?</Button>
-      </div>
-    );
+  componentDidUpdate() {
+    if (this.state.winner === "" && this.state.playerTurn === false) {
+      setTimeout(() => (this.Choose(AIChoice(this.state.grid))), AI_SPEED);
+    }
+  }
+
+  render() {
+    if (this.state.playerTurn === null) {
+      const btnStyles = { width: 100, margin: 10 };
+
+      return (
+        <div>
+          <h2>Play first or second?</h2>
+          <Button style={btnStyles} onClick={() => this.PlayFirst(true)}>First</Button>
+          <Button style={btnStyles} onClick={() => this.PlayFirst(false)}>Second</Button>
+        </div>
+      )
+    }
 
     return (
       <div>
@@ -100,13 +110,16 @@ class Board extends React.Component {
               <tr key={i} className="text-center">
                 {[0, 1, 2].map(j => (
                   <td key={j}>
-                    <Box enabled={this.state.winner === ""} value={this.state.grid[i][j]} choose={() => this.Choose([i, j])} />
+                    <Box
+                      enabled={this.state.winner === "" && this.state.playerTurn}
+                      value={this.state.grid[i][j]} choose={() => this.Choose([i, j])}
+                    />
                   </td>
                 ))}
               </tr>))}
           </tbody>
         </table>
-        {this.state.winner === "" ? <Play /> : <GameOver />}
+        <Footer winner={this.state.winner} playerTurn={this.state.playerTurn} reset={this.Reset} />
       </div>
     )
   }
@@ -115,7 +128,7 @@ class Board extends React.Component {
 const TicTacToe = () => (
   <div className="text-center">
     <h2>Tic Tac Toe!</h2>
-    <p>(Currently 2-player. 1-player vs AI coming soon!)</p>
+    <p>(Currently random AI, real AI coming soon!)</p>
     <Board />
   </div>
 )
