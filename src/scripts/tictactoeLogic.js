@@ -15,18 +15,22 @@ export const CheckForWin = (grid) => {
 }
 
 export const AIChoice = (grid) => {
-  const result = findWinningSpace(grid);
+  const result = findOptimalMove(grid);
 
   if (result) return result;
 
   return randomPlay(grid);
 }
 
-const findWinningSpace = (grid) => {
+const findOptimalMove = (grid) => {
   const allLines = getAllLines(grid);
 
+  return winOrBlock(allLines, "OO") || winOrBlock(allLines, "XX");
+}
+
+const winOrBlock = (allLines, strat) => {
   for (const line in allLines) {
-    if (allLines[line].join("") === "OO") {
+    if (allLines[line].join("") === strat) {
       for (const pos in allLines[line]) {
         if (allLines[line][pos] === "") {
           let x = +line;
