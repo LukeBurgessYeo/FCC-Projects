@@ -20,9 +20,15 @@ export const AIChoice = (grid) => {
     return openeningMove();
   }
 
+  //TODO: refactor forkOrForce to priorites optimal moves.
   if (grid.map(l => l.join("")).join("").length === 2) {
     console.log("AI plays: adjacent corner.")
     return adjacentCorner(grid);
+  }
+
+  if (grid.map(l => l.join("")).join("").length === 3 && grid[1][1] === "O" && grid[1][2] === "X" && grid[2][1] === "X") {
+    console.log("AT plays: block fork.")
+    return [2, 2];
   }
 
   const allLines = getAllLines(grid);
