@@ -16,61 +16,94 @@ export const CheckForWin = (grid) => {
 
 export const AIChoice = (grid) => {
   if (grid.map(l => l.join("")).join("").length === 0) {
-    console.log("AI Plays: Opening corner.");
-    return [0, 2];
+    console.log("AI plays: opening corner.");
+    return openeningMove();
+  }
+
+  //TODO: play adjacent corner as second move.
+  if (grid.map(l => l.join("")).join("").length === 2) {
+    console.log("AI plays: adjacent corner.")
+    return adjacentCorner(grid);
   }
 
   const allLines = getAllLines(grid);
 
   let result = winOrBlock(allLines, "OO");
   if (result) {
-    console.log("AI Plays: Win.");
+    console.log("AI plays: win.");
     return result;
   }
 
   result = winOrBlock(allLines, "XX");
   if (result) {
-    console.log("AI Plays: Block.");
+    console.log("AI plays: block.");
     return result;
   }
 
   result = forkOrForce(grid, 2);
   if (result) {
-    console.log("AI Plays: Fork.");
+    console.log("AI plays: fork.");
     return result;
   }
 
   result = forkOrForce(grid, 1);
   if (result) {
-    console.log("AI Plays: Forcing move.");
+    console.log("AI plays: forcing move.");
     return result;
   }
 
   if (grid[1][1] === "") {
-    console.log("AI Play: Centre");
+    console.log("AI play: centre");
     return [1, 1];
   }
 
   result = oppositeCorner(grid);
   if (result) {
-    console.log("AI Plays: Opposite corner.");
+    console.log("AI Plays: opposite corner.");
     return result;
   }
 
   result = emptySquares(grid, true);
   if (result) {
-    console.log("AI Plays: Empty corner.");
+    console.log("AI plays: empty corner.");
     return result;
   }
 
   result = emptySquares(grid, false);
   if (result) {
-    console.log("AI Plays: Empty side.");
+    console.log("AI plays: empty side.");
     return result;
   }
 
-  console.log("AI Plays: Random move.");
+  console.log("AI plays: random move.");
   return randomPlay(grid);
+}
+
+const openeningMove = () => [
+  [0, 0],
+  [0, 2],
+  [2, 0],
+  [2, 2]
+][Math.floor((Math.random() * 4))];
+
+const adjacentCorner = (grid) => {
+  if (grid[0][0] === "O") {
+    return (grid[0].join("") === "O") ? [0, 2] : [2, 0];
+  }
+
+  if (grid[0][2] === "O") {
+    return (grid[0].join("") === "O") ? [0, 0] : [2, 2];
+  }
+
+  if (grid[2][0] === "O") {
+    return (grid[2].join("") === "O") ? [2, 2] : [0, 0];
+  }
+
+  if (grid[2][2] === "O") {
+    return (grid[2].join("") === "O") ? [2, 0] : [0, 2];
+  }
+
+  return null;
 }
 
 //strat: true for win, false for block.
@@ -99,6 +132,8 @@ const winOrBlock = (allLines, strat) => {
       }
     }
   }
+
+  return null;
 }
 
 
@@ -123,6 +158,8 @@ const forkOrForce = (grid, strat) => {
       }
     }
   }
+
+  return null;
 }
 
 const oppositeCorner = (grid) => {
@@ -141,6 +178,8 @@ const oppositeCorner = (grid) => {
   if (grid[2][0] === "X" && grid[0][2] === "") {
     return [0, 2];
   }
+
+  return null;
 }
 
 //corner: true for corner, false for side.
@@ -168,6 +207,8 @@ const emptySquares = (grid, corner) => {
       return [x, y];
     }
   }
+
+  return null;
 }
 
 const randomPlay = (grid) => {
