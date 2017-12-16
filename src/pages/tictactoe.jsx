@@ -128,7 +128,7 @@ class Board extends React.Component {
 const TicTacToe = () => (
   <div className="text-center">
     <h2>Tic Tac Toe!</h2>
-    <p>(v1.2: AI plays randomly but will win or block a win.)</p>
+    <p>(v 1.3: AI creates forks, blocks and wins.)</p>
     <Board />
   </div>
 )
