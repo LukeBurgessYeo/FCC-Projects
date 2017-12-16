@@ -15,6 +15,16 @@ export const CheckForWin = (grid) => {
 }
 
 export const AIChoice = (grid) => {
+  if (grid.map(l => l.join("")).join("").length === 0) {
+    console.log("AI Plays: Opening corner.");
+    const r = Math.floor((Math.random() * 3));
+    return [
+      [0, 2],
+      [2, 0],
+      [2, 2]
+    ][r];
+  }
+
   const allLines = getAllLines(grid);
 
   let result = winOrBlock(allLines, "OO");
@@ -29,45 +39,46 @@ export const AIChoice = (grid) => {
     return result;
   }
 
-  result = fork(grid);
+  result = forkOrForce(grid, 2);
   if (result) {
     console.log("AI Plays: Fork.");
     return result;
   }
 
-  result = twoInARow(grid);
+  result = forkOrForce(grid, 1);
   if (result) {
     console.log("AI Plays: Forcing move.");
     return result;
   }
 
-  // if (grid[1][1] === "") {
-  //   console.log("AI Play: Centre");
-  //   return [1, 1];
-  // }
+  if (grid[1][1] === "") {
+    console.log("AI Play: Centre");
+    return [1, 1];
+  }
 
-  // result = oppositeCorner(grid);
-  // if (result) {
-  //   console.log("AI Plays: Opposite corner.");
-  //   return result;
-  // }
+  result = oppositeCorner(grid);
+  if (result) {
+    console.log("AI Plays: Opposite corner.");
+    return result;
+  }
 
-  // result = emptySquares(grid, true);
-  // if (result) {
-  //   console.log("AI Plays: Empty corner.");
-  //   return result;
-  // }
+  result = emptySquares(grid, true);
+  if (result) {
+    console.log("AI Plays: Empty corner.");
+    return result;
+  }
 
-  // result = emptySquares(grid, false);
-  // if (result) {
-  //   console.log("AI Plays: Empty side.");
-  //   return result;
-  // }
+  result = emptySquares(grid, false);
+  if (result) {
+    console.log("AI Plays: Empty side.");
+    return result;
+  }
 
   console.log("AI Plays: Random move.");
   return randomPlay(grid);
 }
 
+//strat: true for win, false for block.
 const winOrBlock = (allLines, strat) => {
   for (const line in allLines) {
     if (allLines[line].join("") === strat) {
@@ -95,7 +106,9 @@ const winOrBlock = (allLines, strat) => {
   }
 }
 
-const fork = (grid) => {
+
+//strat: 2 for fork, 1 for forcing move.
+const forkOrForce = (grid, strat) => {
   let g = JSON.parse(JSON.stringify(grid));
   for (const x in g) {
     for (const y in g[x]) {
@@ -106,7 +119,7 @@ const fork = (grid) => {
         for (const line in newLines) {
           if (newLines[line].join("") === "OO") {
             doubleLines += 1;
-            if (doubleLines === 2) {
+            if (doubleLines === strat) {
               return [x, y];
             }
           }
@@ -115,11 +128,6 @@ const fork = (grid) => {
       }
     }
   }
-}
-
-const twoInARow = (grid) => {
-  //TODO: create threat.
-  return null;
 }
 
 const oppositeCorner = (grid) => {
@@ -140,6 +148,7 @@ const oppositeCorner = (grid) => {
   }
 }
 
+//corner: true for corner, false for side.
 const emptySquares = (grid, corner) => {
   const corners = [
     [0, 0],
@@ -158,8 +167,8 @@ const emptySquares = (grid, corner) => {
   const squares = (corner) ? corners : sides;
 
   for (const s in squares) {
-    const x = sides[s[0]];
-    const y = sides[s[1]];
+    const x = squares[+s][0];
+    const y = squares[+s][1];
     if (grid[x][y] === "") {
       return [x, y];
     }
