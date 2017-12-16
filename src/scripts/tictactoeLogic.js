@@ -17,12 +17,7 @@ export const CheckForWin = (grid) => {
 export const AIChoice = (grid) => {
   if (grid.map(l => l.join("")).join("").length === 0) {
     console.log("AI Plays: Opening corner.");
-    const r = Math.floor((Math.random() * 3));
-    return [
-      [0, 2],
-      [2, 0],
-      [2, 2]
-    ][r];
+    return [0, 2];
   }
 
   const allLines = getAllLines(grid);
