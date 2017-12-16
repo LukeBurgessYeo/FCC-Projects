@@ -20,7 +20,6 @@ export const AIChoice = (grid) => {
     return openeningMove();
   }
 
-  //TODO: play adjacent corner as second move.
   if (grid.map(l => l.join("")).join("").length === 2) {
     console.log("AI plays: adjacent corner.")
     return adjacentCorner(grid);
