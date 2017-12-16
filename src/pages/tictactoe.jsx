@@ -17,6 +17,17 @@ const Box = (props) => {
 }
 
 const Footer = (props) => {
+  if (props.playerTurn === null) {
+    const btnStyles = { width: 100, margin: 10 };
+
+    return (
+      <div>
+        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playFirst(true)}>Play First</Button>
+        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playFirst(false)}>Play Second</Button>
+      </div>
+    )
+  }
+
   if (props.winner === "") {
     return (
       <div>
@@ -90,18 +101,6 @@ class Board extends React.Component {
   }
 
   render() {
-    if (this.state.playerTurn === null) {
-      const btnStyles = { width: 100, margin: 10 };
-
-      return (
-        <div>
-          <h2>Play first or second?</h2>
-          <Button style={btnStyles} onClick={() => this.PlayFirst(true)}>First</Button>
-          <Button style={btnStyles} onClick={() => this.PlayFirst(false)}>Second</Button>
-        </div>
-      )
-    }
-
     return (
       <div>
         <table>
@@ -119,7 +118,7 @@ class Board extends React.Component {
               </tr>))}
           </tbody>
         </table>
-        <Footer winner={this.state.winner} playerTurn={this.state.playerTurn} reset={this.Reset} />
+        <Footer playFirst={this.PlayFirst} winner={this.state.winner} playerTurn={this.state.playerTurn} reset={this.Reset} />
       </div>
     )
   }
