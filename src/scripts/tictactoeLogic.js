@@ -111,7 +111,7 @@ const winOrBlock = (allLines, strat) => {
 }
 
 
-//strat: O for fork, X for forcing move.
+//symbol: O for fork, X for forcing move.
 const forkOrForce = (grid, symbol) => {
   let g = JSON.parse(JSON.stringify(grid));
   for (const x in g) {
