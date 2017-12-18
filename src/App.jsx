@@ -10,8 +10,8 @@ import Wikipedia from './pages/wikipedia'
 import Twitch from './pages/twitch'
 import Calculator from './pages/calculator'
 import Pomodoro from './pages/pomodoro'
-import ComingSoon from './pages/comingsoon'
 import TicTacToe from './pages/tictactoe'
+import Simon from './pages/simon'
 
 const App = () => (
   <Router basename="/FCC-Projects">
@@ -31,7 +31,7 @@ const App = () => (
               <Route path="/calculator" component={Calculator} />
               <Route path="/pomodoro" component={Pomodoro} />
               <Route path="/tictactoe" component={TicTacToe} />
-              <Route path="/simon" component={ComingSoon} />
+              <Route path="/simon" component={Simon} />
               <Redirect to="/" component={Home} />
             </Switch>
           </Col>

@@ -20,17 +20,6 @@ export const AIChoice = (grid) => {
     return openeningMove();
   }
 
-  //TODO: refactor forkOrForce to priorites optimal moves.
-  if (grid.map(l => l.join("")).join("").length === 2) {
-    console.log("AI plays: adjacent corner.")
-    return adjacentCorner(grid);
-  }
-
-  if (grid.map(l => l.join("")).join("").length === 3 && grid[1][1] === "O" && grid[1][2] === "X" && grid[2][1] === "X") {
-    console.log("AT plays: block fork.")
-    return [2, 2];
-  }
-
   const allLines = getAllLines(grid);
 
   let result = winOrBlock(allLines, "OO");
@@ -45,13 +34,13 @@ export const AIChoice = (grid) => {
     return result;
   }
 
-  result = forkOrForce(grid, 2);
+  result = forkOrForce(grid, "O");
   if (result) {
     console.log("AI plays: fork.");
     return result;
   }
 
-  result = forkOrForce(grid, 1);
+  result = forkOrForce(grid, "X");
   if (result) {
     console.log("AI plays: forcing move.");
     return result;
@@ -91,26 +80,6 @@ const openeningMove = () => [
   [2, 2]
 ][Math.floor((Math.random() * 4))];
 
-const adjacentCorner = (grid) => {
-  if (grid[0][0] === "O") {
-    return (grid[0].join("") === "O") ? [0, 2] : [2, 0];
-  }
-
-  if (grid[0][2] === "O") {
-    return (grid[0].join("") === "O") ? [0, 0] : [2, 2];
-  }
-
-  if (grid[2][0] === "O") {
-    return (grid[2].join("") === "O") ? [2, 2] : [0, 0];
-  }
-
-  if (grid[2][2] === "O") {
-    return (grid[2].join("") === "O") ? [2, 0] : [0, 2];
-  }
-
-  return null;
-}
-
 //strat: true for win, false for block.
 const winOrBlock = (allLines, strat) => {
   for (const line in allLines) {
@@ -142,19 +111,19 @@ const winOrBlock = (allLines, strat) => {
 }
 
 
-//strat: 2 for fork, 1 for forcing move.
-const forkOrForce = (grid, strat) => {
+//strat: O for fork, X for forcing move.
+const forkOrForce = (grid, symbol) => {
   let g = JSON.parse(JSON.stringify(grid));
   for (const x in g) {
     for (const y in g[x]) {
       if (g[x][y] === "") {
-        g[x][y] = "O";
+        g[x][y] = symbol;
         const newLines = getAllLines(g);
         let doubleLines = 0;
         for (const line in newLines) {
-          if (newLines[line].join("") === "OO") {
+          if (newLines[line].join("") === symbol + symbol) {
             doubleLines += 1;
-            if (doubleLines === strat) {
+            if (doubleLines === 2) {
               return [x, y];
             }
           }
