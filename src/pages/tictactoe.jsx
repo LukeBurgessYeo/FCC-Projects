@@ -6,17 +6,36 @@ const AI_SPEED = 500;
 
 const Box = (props) => {
   const canClick = (props.value === "" && props.enabled);
+  let value = "";
+
+  if (props.value !== "" && props.switchSymbols) {
+    if (props.value === "X") value = "O";
+    if (props.value === "O") value = "X";
+  } else {
+    value = props.value;
+  }
 
   return (
     <div
       className={(canClick ? "xoBoxHover " : "") + "xoBox"}
       onClick={canClick && props.choose}>
-      <p>{props.value}</p>
+      <p>{value}</p>
     </div>
   )
 }
 
 const Footer = (props) => {
+  if (props.playerSymbol === null) {
+    const btnStyles = { width: 100, margin: 10 };
+
+    return (
+      <div>
+        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playAs("X")}>Play as X</Button>
+        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playAs("O")}>Play as O</Button>
+      </div>
+    )
+  }
+
   if (props.playerTurn === null) {
     const btnStyles = { width: 100, margin: 10 };
 
@@ -60,6 +79,7 @@ class Board extends React.Component {
         ["", "", ""]
       ],
       playerTurn: null,
+      playerSymbol: null,
       winner: ""
     };
   }
@@ -84,6 +104,7 @@ class Board extends React.Component {
         ["", "", ""]
       ],
       playerTurn: null,
+      playerSymbol: null,
       winner: ""
     });
   }
@@ -91,6 +112,12 @@ class Board extends React.Component {
   PlayFirst = (first) => {
     this.setState({
       playerTurn: first
+    });
+  }
+
+  PlayAs = (symbol) => {
+    this.setState({
+      playerSymbol: symbol
     });
   }
 
@@ -111,14 +138,23 @@ class Board extends React.Component {
                   <td key={j}>
                     <Box
                       enabled={this.state.winner === "" && this.state.playerTurn}
-                      value={this.state.grid[i][j]} choose={() => this.Choose([i, j])}
+                      value={this.state.grid[i][j]}
+                      switchSymbols={this.state.playerSymbol === "O"}
+                      choose={() => this.Choose([i, j])}
                     />
                   </td>
                 ))}
               </tr>))}
           </tbody>
         </table>
-        <Footer playFirst={this.PlayFirst} winner={this.state.winner} playerTurn={this.state.playerTurn} reset={this.Reset} />
+        <Footer
+          playerSymbol={this.state.playerSymbol}
+          playAs={this.PlayAs}
+          playFirst={this.PlayFirst}
+          winner={this.state.winner}
+          playerTurn={this.state.playerTurn}
+          reset={this.Reset}
+        />
       </div>
     )
   }
