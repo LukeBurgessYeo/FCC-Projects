@@ -36,17 +36,6 @@ const Footer = (props) => {
     )
   }
 
-  if (props.playerTurn === null) {
-    const btnStyles = { width: 100, margin: 10 };
-
-    return (
-      <div>
-        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playFirst(true)}>Play First</Button>
-        <Button bsStyle="primary" style={btnStyles} onClick={() => props.playFirst(false)}>Play Second</Button>
-      </div>
-    )
-  }
-
   if (props.winner === "") {
     return (
       <div>
@@ -109,15 +98,10 @@ class Board extends React.Component {
     });
   }
 
-  PlayFirst = (first) => {
-    this.setState({
-      playerTurn: first
-    });
-  }
-
   PlayAs = (symbol) => {
     this.setState({
-      playerSymbol: symbol
+      playerSymbol: symbol,
+      playerTurn: (symbol === "X")
     });
   }
 
@@ -150,7 +134,6 @@ class Board extends React.Component {
         <Footer
           playerSymbol={this.state.playerSymbol}
           playAs={this.PlayAs}
-          playFirst={this.PlayFirst}
           winner={this.state.winner}
           playerTurn={this.state.playerTurn}
           reset={this.Reset}
